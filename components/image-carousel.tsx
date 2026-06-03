@@ -34,7 +34,12 @@ export function ImageCarousel({ images, title }: ImageCarouselProps) {
             transition={{ duration: 0.28 }}
             className="absolute inset-0"
           >
-            <Image src={currentImage} alt={`${title} 截图 ${index + 1}`} fill className="object-cover" />
+            <Image
+              src={currentImage}
+              alt={`${title} 截图 ${index + 1}`}
+              fill
+              className="object-contain"
+            />
           </motion.div>
         </AnimatePresence>
         <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-gradient-to-t from-slate-950/85 to-transparent p-4">
