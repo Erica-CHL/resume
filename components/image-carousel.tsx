@@ -8,9 +8,10 @@ import { useState } from "react";
 type ImageCarouselProps = {
   images: string[];
   title: string;
+  fillHeight?: boolean;
 };
 
-export function ImageCarousel({ images, title }: ImageCarouselProps) {
+export function ImageCarousel({ images, title, fillHeight = false }: ImageCarouselProps) {
   const [index, setIndex] = useState(0);
   const currentImage = images[index];
 
@@ -23,8 +24,12 @@ export function ImageCarousel({ images, title }: ImageCarouselProps) {
   }
 
   return (
-    <div className="glass-panel overflow-hidden rounded-lg">
-      <div className="relative aspect-[16/10] overflow-hidden bg-slate-950">
+    <div className={`glass-panel overflow-hidden rounded-lg ${fillHeight ? "h-full" : ""}`}>
+      <div
+        className={`relative overflow-hidden bg-slate-950 ${
+          fillHeight ? "h-[36rem] lg:h-full lg:min-h-[42rem]" : "aspect-[16/10]"
+        }`}
+      >
         <AnimatePresence mode="wait">
           <motion.div
             key={currentImage}
@@ -38,7 +43,7 @@ export function ImageCarousel({ images, title }: ImageCarouselProps) {
               src={currentImage}
               alt={`${title} 截图 ${index + 1}`}
               fill
-              className="object-contain"
+              className={`object-contain ${fillHeight ? "p-3 sm:p-5" : ""}`}
             />
           </motion.div>
         </AnimatePresence>
