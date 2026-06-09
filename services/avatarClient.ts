@@ -1,10 +1,20 @@
+export type AvatarSource = {
+  id: string;
+  title: string;
+  source: string;
+  tags: string[];
+};
+
 export type AvatarChatRequest = {
   message: string;
   projectId?: string;
 };
 
 export type AvatarChatResponse = {
+  success: boolean;
   reply: string;
+  retrievalStatus?: string;
+  sources: AvatarSource[];
 };
 
 export async function sendAvatarMessage(
@@ -18,9 +28,11 @@ export async function sendAvatarMessage(
     body: JSON.stringify(payload),
   });
 
-  if (!response.ok) {
-    throw new Error("Avatar service request failed");
+  const result = (await response.json()) as AvatarChatResponse;
+
+  if (!response.ok && !result.reply) {
+    throw new Error("Project Agent request failed");
   }
 
-  return response.json() as Promise<AvatarChatResponse>;
+  return result;
 }
