@@ -59,10 +59,12 @@ export const projects: Project[] = [
       "/projects/stock-copilot/appone_three.jpg",
       "/projects/stock-copilot/appone_four.jpg",
       "/projects/stock-copilot/appone_five.jpg",
+      "/projects/stock-copilot/appone_guest.png",
     ],
     background:
       "投研信息通常分散在行情、研报、新闻、产业链和策略记录中。这个项目尝试把 AI 推理、知识库检索和可视化工作台结合起来，让投研过程从信息收集、逻辑推演到风险监控都能被结构化呈现。",
     features: [
+      "游客访问模式，无需登录即可只读浏览项目首页和核心投研信息",
       "投研中枢面板，展示市场情绪、风控评分和板块动能",
       "Agent 圆桌推演，用多角色协作拆解行情逻辑",
       "RAG 知识库，支持投研资料入库和多文档对比",
@@ -87,6 +89,14 @@ export const projects: Project[] = [
       "让产业链沙盘支持更多行业和自定义节点。",
     ],
     timeline: [
+      {
+        date: "2026-06-11",
+        version: "v0.9",
+        title: "新增游客访问页面",
+        reason: "作品展示和快速体验场景下，访问者需要在不获取完整系统权限的情况下了解项目首页与核心投研能力。",
+        additions: ["游客身份浏览入口", "无需登录访问首页", "受限的只读体验"],
+        benefits: ["降低项目体验门槛", "在保留登录鉴权边界的同时方便访客快速了解产品"],
+      },
       {
         date: "2026-05-06",
         version: "v0.8",
