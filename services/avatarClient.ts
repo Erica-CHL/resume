@@ -1,3 +1,5 @@
+import { answerProjectQuestion } from "@/data/project-knowledge";
+
 export type AvatarSource = {
   id: string;
   title: string;
@@ -20,19 +22,16 @@ export type AvatarChatResponse = {
 export async function sendAvatarMessage(
   payload: AvatarChatRequest,
 ): Promise<AvatarChatResponse> {
-  const response = await fetch("/api/avatar-chat", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  });
+  const message = payload.message.trim();
 
-  const result = (await response.json()) as AvatarChatResponse;
-
-  if (!response.ok && !result.reply) {
-    throw new Error("Project Agent request failed");
+  if (!message) {
+    return {
+      success: false,
+      reply: "请输入问题后再发送。",
+      retrievalStatus: "EMPTY_QUESTION",
+      sources: [],
+    };
   }
 
-  return result;
+  return answerProjectQuestion(message, payload.projectId);
 }
